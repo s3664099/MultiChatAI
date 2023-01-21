@@ -54,5 +54,5 @@ def ai_response(prompt):
 
 """
 18 Jan 2023 - Created File. Set up flask
-21 Jan 2023 - Added route for AJAX Call
+21 Jan 2023 - Added route for AJAX Call. Removed api keys and used environment variables
 """
