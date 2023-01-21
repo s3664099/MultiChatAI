@@ -1,0 +1,31 @@
+<!--
+File: MultiChatBot Main Page
+Author: David Sarkies
+Initial: 18 January 2023
+Update: 21 January 2023
+Version: 0.2
+-->
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Bot Chatter</title>
+    	<meta name="viewport" content="initial-scale=1.0">
+    	<meta name="robots" content="noindex">
+    	<meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1">
+    </head>
+    <body>
+    	<H1 style="text-align: center;">Chat with the Bot</H1>
+    	<div id="display">
+    		<input type="text" id="input">
+    		<button id="buttEl" onclick="getResponse()">Ask</button>
+    	</div>
+    </body>
+    <script src="{{ url_for('static', filename = 'script.js')}}"></script>
+</html>
+
+<!--
+18 January 2023 - Created File
+21 January 2023 - Moved script into seperate file
+-->
