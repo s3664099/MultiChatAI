@@ -47,6 +47,18 @@ def get_response():
 
 	return make_response(jsonify({"response":reply}),200)
 
+@app.route('/get_update',methods=['POST'])
+def get_update():
+	data = request.data
+	length = json.loads(data.decode('utf-8'))
+	updated_discussion = []
+
+	if (int(length)<len(discussion)):
+		for x in range(length,len(discussion)):
+			updated_discussion.append(x)
+
+	return make_response(jsonify({"response":updated_discussion}),200)
+
 def ai_response(prompt):
 
     num_completions = 3

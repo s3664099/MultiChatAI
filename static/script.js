@@ -69,12 +69,22 @@ function getBotResponse(input) {
 //Retrives updates from the backend, to see if somebody has updated it.
 function getUpdates() {
     
-    /*
+    
     fetch('/get_update', {
         method:"POST",
         body: JSON.stringify(discussionLength)
-    }
-    */
+    }).then(function(response){
+        if (response.status !== 200) {
+              console.log('looks like there is a problem. Status code :'+response.status);
+              return "Unable to get Response";
+        }
+
+        return response.json();
+    }).then(function(data) {
+        console.log(data.response);
+        console.log(length(data.response));
+    });
+
     console.log(discussionLength);
 
     setTimeout(getUpdates,5000);
