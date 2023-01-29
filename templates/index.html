@@ -17,11 +17,13 @@ Version: 0.2
     </head>
     <body>
     	<H1 style="text-align: center;">Chat with the Bot</H1>
+        <div id="previousConvo"></div>
     	<div id="display">
     		<input type="text" id="input">
     		<button id="buttEl" onclick="getResponse()">Ask</button>
     	</div>
     </body>
+    <script>{% include 'template.js' %}</script>
     <script src="{{ url_for('static', filename = 'script.js')}}"></script>
 </html>
 

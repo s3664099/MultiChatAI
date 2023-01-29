@@ -6,18 +6,33 @@ Update: 21 January 2023
 Version: 0.1
 */
 
+//Main function to get a response from a query, and redraws the page
 function getResponse() {
     input = document.getElementById('input');
     buttel = document.getElementById('buttEl');
-    disp = document.getElementById('display')
-    const para = document.createElement("p");
-    para.innerText = input.value;
+    addLines(input.value);
     input.remove();
     buttel.remove();
-    disp.appendChild(para);
     getBotResponse(input.value);
 }
 
+//Places the input/response in a paragraph
+function addLines(input) {
+
+    discussionLength++;
+    const lineBreak = document.createElement("br");
+    const lineAcross = document.createElement("hr");
+    disp = document.getElementById('display')
+    const para = document.createElement("p");
+    para.innerText = input;
+    disp.appendChild(para);
+    disp.appendChild(lineBreak);
+    disp.appendChild(lineAcross);
+    disp.appendChild(lineBreak);
+
+}
+
+//Gets the response from a query
 function getBotResponse(input) {
     fetch ('/get_response', {
         method: "POST",
@@ -33,8 +48,8 @@ function getBotResponse(input) {
         //Converts the response into JSON
         return response.json();
     }).then(function(data) {
-        disp = document.getElementById('display')
-        const resp_para = document.createElement("p");
+
+        //Redraws the html page and adds the queries and responses above
         const newInput = document.createElement("input")
         const newButton = document.createElement("button");
         newInput.type = "text";
@@ -42,14 +57,30 @@ function getBotResponse(input) {
         newButton.id = "buttEl";
         newButton.innerText = "Ask";
         newButton.addEventListener("click",getResponse);
-        resp_para.innerText = data.response
-        disp.appendChild(resp_para)
+        addLines(data.response)
         disp.appendChild(newInput);
         disp.appendChild(newButton);
         newInput.focus()
         newInput.select()
     })
 }
+
+//Executes a javascript function every 5 seconds
+//Retrives updates from the backend, to see if somebody has updated it.
+function getUpdates() {
+    
+    /*
+    fetch('/get_update', {
+        method:"POST",
+        body: JSON.stringify(discussionLength)
+    }
+    */
+    console.log(discussionLength);
+
+    setTimeout(getUpdates,5000);
+}
+
+getUpdates();
 
 /*
 21 January 2023 - Created file

@@ -16,22 +16,34 @@ app = Flask(__name__,
 openai.api_key = os.environ.get("OPENAI_API_KEY")
 app.secretkey = os.environ.get("FLASK_API_KEY")
 model_engine = "text-davinci-002"
+discussion = []
 
+#Sets up template
 @app.route('/')
 def main():
-	return render_template("index.html")
 
+	previous_discussion = []
+
+	for x in discussion:
+		previous_discussion.append(x.replace("\n","<br>"))
+
+	return render_template("index.html",discussion=previous_discussion,length=len(discussion))
+
+#AJAX call to send a query to the AI and return a response
 @app.route('/get_response', methods=['POST'])
 def get_response():
 
-	data = request.data
-	response = ai_response(json.loads(data.decode('utf-8')))
-
 	reply = ""
+	data = request.data
+	query = json.loads(data.decode('utf-8'))
+
+	discussion.append(query)
+	response = ai_response(query)
 
 	for completion in response:
 		reply += completion.text
 
+	discussion.append(reply)
 
 	return make_response(jsonify({"response":reply}),200)
 
