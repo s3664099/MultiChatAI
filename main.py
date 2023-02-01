@@ -55,7 +55,7 @@ def get_update():
 
 	if (int(length)<len(discussion)):
 		for x in range(length,len(discussion)):
-			updated_discussion.append(x)
+			updated_discussion.append(discussion[x])
 
 	return make_response(jsonify({"response":updated_discussion}),200)
 

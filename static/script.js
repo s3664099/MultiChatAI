@@ -81,8 +81,18 @@ function getUpdates() {
 
         return response.json();
     }).then(function(data) {
-        console.log(data.response);
-        console.log(length(data.response));
+
+        console.log(data.response.length)
+
+        if (data.response.length>0) {
+            for (var x=0;x<data.response.length;x++) {
+                addLines(data.response[x]);
+            }
+        }
+
+        data.response = [];
+
+        console.log(data.response.length);
     });
 
     console.log(discussionLength);
