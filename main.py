@@ -2,8 +2,8 @@
 File: MultiChatBot main program
 Author: David Sarkies
 Initial: 18 January 2023
-Update: 21 January 2023
-Version: 0.3
+Update: 1 February 2023
+Version: 0.4
 """
 
 from flask import Flask, render_template, request, session, jsonify, make_response
@@ -47,6 +47,7 @@ def get_response():
 
 	return make_response(jsonify({"response":reply}),200)
 
+#AJAX call to check if there have been any other repsonses, and if there has been, will send them to the front end.
 @app.route('/get_update',methods=['POST'])
 def get_update():
 	data = request.data
@@ -59,6 +60,7 @@ def get_update():
 
 	return make_response(jsonify({"response":updated_discussion}),200)
 
+#Function to get the response from the AI to a query.
 def ai_response(prompt):
 
     num_completions = 3
@@ -79,4 +81,5 @@ def ai_response(prompt):
 """
 18 Jan 2023 - Created File. Set up flask
 21 Jan 2023 - Added route for AJAX Call. Removed api keys and used environment variables
+1 February 2023 - Completed the second AJAX call which checks if any further disucussion has been made, and updates the front end.
 """
